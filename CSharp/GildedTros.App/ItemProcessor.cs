@@ -27,10 +27,19 @@ public abstract class ItemProcessor
 
 public static class ItemProcessorFactory
 {
-    public static ItemProcessor Create(Item item) => item.Name switch
+    public static ItemProcessor Create(Item item)  
     {
-        "B-DAWG Keychain" => new LegendaryItemProcessor(item),
-        "Good Wine" => new GoodWineProcessor(item),
-        _ => new NormalItemProcessor(item)
-    };
+        switch(item.Name)
+        {
+            case "B-DAWG Keychain":
+                return new LegendaryItemProcessor(item);
+            case "Good Wine":
+                return new GoodWineProcessor(item);
+            case "Backstage passes for Re:factor":
+            case "Backstage passes for HAXX":
+                return new BackstagePassProcessor(item);
+            default:
+                return new NormalItemProcessor(item);   
+        }
+    }
 }
