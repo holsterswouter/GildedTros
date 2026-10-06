@@ -38,6 +38,10 @@ public static class ItemProcessorFactory
             case "Backstage passes for Re:factor":
             case "Backstage passes for HAXX":
                 return new BackstagePassProcessor(item);
+            case "Duplicate Code":
+            case "Long Methods":
+            case "Ugly Variable Names":
+                return new SmellyItemProcessor(item);
             default:
                 return new NormalItemProcessor(item);   
         }
