@@ -80,5 +80,26 @@ namespace GildedTros.App
                 () => Assert.Equal(50, Items[4].Quality)
             );
         }
+
+        [Fact]
+        public void Smelly()
+        {
+            IList<Item> Items = new List<Item> { 
+                new Item { Name = "Duplicate Code", SellIn = 1, Quality = 4 },
+                new Item { Name = "Long Methods", SellIn = 0, Quality = 4 },
+                new Item { Name = "Ugly Variable Names", SellIn = 1, Quality = 1 },
+                new Item { Name = "Duplicate Code", SellIn = 0, Quality = 1 }
+            };
+            GildedTros app = new GildedTros(Items);
+            app.UpdateQuality();
+
+            Assert.Multiple(
+                () => Assert.Equal(0, Items[0].SellIn),
+                () => Assert.Equal(2, Items[0].Quality),
+                () => Assert.Equal(0, Items[1].Quality),
+                () => Assert.Equal(0, Items[2].Quality),
+                () => Assert.Equal(0, Items[3].Quality)
+            );
+        }
     }
 }
