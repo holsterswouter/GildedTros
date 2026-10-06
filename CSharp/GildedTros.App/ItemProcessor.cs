@@ -29,6 +29,7 @@ public static class ItemProcessorFactory
 {
     public static ItemProcessor Create(Item item) => item.Name switch
     {
+        "B-DAWG Keychain" => new LegendaryItemProcessor(item),
         _ => new NormalItemProcessor(item)
     };
 }
